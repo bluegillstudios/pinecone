@@ -1,6 +1,6 @@
 #include "include/kernel.h"
 #include "include/ipc.h"
-#include "include/arch/x86_64.h"  // or arm64.h depending on build target
+#include "include/arch/x86_64/x86_64.h"  
 #include <stdint.h>
 #include <stddef.h>
 
@@ -19,6 +19,12 @@ typedef struct {
     void* stack;
     void* context;  // arch-specific saved registers
 } task_t;
+
+typedef struct {
+    uint64_t r15, r14, r13, r12, r11, r10, r9, r8;
+    uint64_t rsi, rdi, rbp, rdx, rcx, rbx, rax;
+    uint64_t rip, rsp;
+} context_t;
 
 static task_t task_table[MAX_PROCESSES];
 static uint64_t next_pid = 1;
