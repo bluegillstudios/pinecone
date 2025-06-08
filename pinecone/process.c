@@ -1,16 +1,17 @@
 #include "include/kernel.h"
 #include "include/ipc.h"
 #include "include/arch/x86_64/x86_64.h"  
+#include "include/task.h"
 #include <stdint.h>
 #include <stddef.h>
 
 #define MAX_PROCESSES 64
 
 typedef enum {
-    TASK_READY,
-    TASK_RUNNING,
-    TASK_WAITING,
-    TASK_TERMINATED
+    TASK_STATE_READY,
+    TASK_STATE_RUNNING,
+    TASK_STATE_WAITING,
+    TASK_STATE_TERMINATED
 } task_state_t;
 
 typedef struct {
@@ -32,10 +33,10 @@ static task_t* current_task = NULL;
 
 task_t* create_process(void (*entry_point)(void)) {
     for (int i = 0; i < MAX_PROCESSES; i++) {
-        if (task_table[i].state == TASK_TERMINATED || task_table[i].state == 0) {
+        if (task_table[i].state == TASK_STATE_TERMINATED || task_table[i].state == 0) {
             task_t* task = &task_table[i];
             task->pid = next_pid++;
-            task->state = TASK_READY;
+            task->state = TASK_STATE_READY;
 
             // Allocate stack (just a simple bump for now)
             task->stack = alloc_stack(); // Implemented in memory.c
@@ -49,11 +50,11 @@ task_t* create_process(void (*entry_point)(void)) {
 
 void schedule() {
     for (int i = 0; i < MAX_PROCESSES; i++) {
-        if (task_table[i].state == TASK_READY) {
+        if (task_table[i].state == TASK_STATE_READY) {
             if (current_task)
-                current_task->state = TASK_READY;
+                current_task->state = TASK_STATE_READY;
 
-            task_table[i].state = TASK_RUNNING;
+            task_table[i].state = TASK_STATE_RUNNING;
             current_task = &task_table[i];
             switch_to(current_task->context); // arch-specific
             return;
