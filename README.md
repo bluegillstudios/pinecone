@@ -1,36 +1,44 @@
-# Pinecone Programming Language
+# Pinecone
 
-**Pinecone** is a modern, high-performance programming language inspired by the best features of Python, C, and Rust. 
-
-It aims to combine Python’s readability and ease of use, C’s low-level power, and Rust’s memory safety and fearless concurrency into one language.
+Pinecone is a lightweight, easy-to-use 3D engine written in C++ for creating retro-style first-person games like Quake and DOOM.  
+We use SDL2 and OpenGL and support modern C++17.
 
 ---
 
 ## Features
 
-- Clean, readable syntax with optional indentation-based blocks
-- Statically typed with powerful type inference
-- Ownership and borrowing system for memory safety without garbage collection
-- Manual memory control with safe `unsafe` blocks for systems programming
-- Built-in async/await and concurrency primitives
-- Interoperability with C libraries via FFI
-- Comprehensive standard library for I/O, collections, networking, and more
-
+- Simple API for rendering and camera control  
+- Retro-style 3D graphics with textured meshes  
+- Cross-platform support (Windows, Linux, macOS)  
+- Easy integration of assets and external libraries via Git submodules
 ---
+## Getting Started
 
-## Example
+1. Clone the repository with submodules
 
-```pinecone
-fn factorial(n: int) -> int {
-    if n <= 1 {
-        return 1
-    } else {
-        return n * factorial(n - 1)
-    }
-}
+```bash
+git clone --recurse-submodules https://github.com/bluegillstudios/pinecone.git
+cd pinecone
+```
 
-fn main() {
-    let mut x = 5
-    let y = factorial(x)
-    print("Factorial of ", x, " is ", y)
-}
+## Prereqs
+
+- C++17 compatible compiler (GCC, Clang, MSVC)
+- SDL2 development libraries
+- OpenGL development headers
+- CMake 3.15 or newer
+
+## "How do I install that?"
+
+
+On Ubuntu/Debian:
+```bash
+sudo apt install build-essential cmake libsdl2-dev libgl1-mesa-dev
+```
+On macOS (using Homebrew):
+
+bash
+
+```brew install cmake sdl2
+```
+On Windows, the submodules should do
