@@ -30,8 +30,7 @@ cd pinecone
 
 ## "How do I install that?"
 
-
-On Ubuntu/Debian:
+On Ubuntu/Debian (linux):
 ```bash
 sudo apt install build-essential cmake libsdl2-dev libgl1-mesa-dev
 ```
@@ -40,4 +39,23 @@ On macOS (using Homebrew):
 ```bash
 brew install cmake sdl2
 ```
-On Windows, the submodules should do
+On Windows, the submodules should do the trick.
+
+## Building
+```bash
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
+
+Then from the build directory:
+
+```bash
+./pinecone
+```
+
+## Contributions
+Feel free to submit issues and pull requests! Pinecone aims to stay easy to use.
+If you add features, please keep retro style and simplicity in mind.
+
