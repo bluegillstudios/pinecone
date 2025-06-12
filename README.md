@@ -37,8 +37,7 @@ sudo apt install build-essential cmake libsdl2-dev libgl1-mesa-dev
 ```
 On macOS (using Homebrew):
 
-bash
-
-```brew install cmake sdl2
+```bash
+brew install cmake sdl2
 ```
 On Windows, the submodules should do
