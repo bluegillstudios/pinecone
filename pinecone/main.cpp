@@ -156,7 +156,7 @@ GLuint loadTexture(const char* path) {
     return textureID;
 }
 
-int main(int argc, char* argv[]) {
+int main(int /*argc*/, char* /*argv*/[]) { // Stupidest shit I've ever done as a patch. Just feels wrong.
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         std::cerr << "SDL_Init Error: " << SDL_GetError() << "\n";
         return 1;
