@@ -19,11 +19,16 @@ include_directories(extern/glm)
 
 include_directories(${SDL2_INCLUDE_DIRS} include)
 
-add_executable(pinecone
+add_subdirectory(extern/glad)
+
+add_executable(Pinecone
   pinecone/main.cpp
 )
 
-target_link_libraries(pinecone
+target_link_libraries(Pinecone
   ${SDL2_LIBRARIES}
   OpenGL::GL
+  glad
 )
+
+target_include_directories(Pinecone PRIVATE extern/glad/include)
