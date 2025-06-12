@@ -1,5 +1,5 @@
 #include <SDL2/SDL.h>
-#include <glad/glad.h>
+#include <GL/glew.h> 
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -187,9 +187,11 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // Load OpenGL functions with GLAD
-    if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress)) {
-        std::cerr << "Failed to initialize GLAD\n";
+    // Initialize GLEW (must be after context creation)
+    glewExperimental = GL_TRUE;
+    GLenum glewStatus = glewInit();
+    if (glewStatus != GLEW_OK) {
+        std::cerr << "Failed to initialize GLEW: " << glewGetErrorString(glewStatus) << "\n";
         SDL_GL_DeleteContext(glContext);
         SDL_DestroyWindow(window);
         SDL_Quit();
