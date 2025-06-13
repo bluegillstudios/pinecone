@@ -1,27 +1,31 @@
 #pragma once
 
-#include <vector>
 #include <string>
+#include <vector>
+
 #include "Mesh.h"
-#include "Texture.h"
+
+#include <assimp/scene.h>
+#include <assimp/Importer.hpp>
+#include <assimp/postprocess.h>
+
+class Renderer;
+class Shader;
 
 class Model {
 public:
     Model() = default;
     Model(const std::string& path);
 
-    void Draw(const class Renderer& renderer, const class Shader& shader,
+    void Draw(const Renderer& renderer, const Shader& shader,
               const glm::mat4& modelMatrix,
               const glm::mat4& viewMatrix,
               const glm::mat4& projectionMatrix);
 
 private:
     std::vector<Mesh> meshes;
-    std::vector<Texture> texturesLoaded; // To avoid loading duplicates
 
     void LoadModel(const std::string& path);
-    void ProcessNode(void* node); // placeholder, to be implemented depending on loader
-    Mesh ProcessMesh(void* mesh); // placeholder
-
-    // We can use Assimp or write our own model loading.
+    void ProcessNode(aiNode* node, const aiScene* scene);
+    Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
 };

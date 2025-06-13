@@ -13,6 +13,7 @@ endif()
 # SDL2 and OpenGL as before
 find_package(SDL2 REQUIRED)
 find_package(OpenGL REQUIRED)
+find_package(ASSIMP REQUIRED)
 
 # Include GLM headers from extern/glm
 include_directories(extern/glm)
